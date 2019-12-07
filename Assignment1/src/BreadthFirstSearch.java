@@ -1,11 +1,9 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class BreadthFirstSearch  extends ASearch
 {
 	Queue <ASearchNode> openList;
+	HashSet <ASearchNode> openListHash;
 	ArrayList<ASearchNode> closeList;
 
 
@@ -26,6 +24,7 @@ public class BreadthFirstSearch  extends ASearch
 	public void initLists() 
 	{
 		openList = new LinkedList<> ();
+		openListHash = new HashSet<>();
 		closeList = new ArrayList<>();
 	}
 
@@ -43,7 +42,7 @@ public class BreadthFirstSearch  extends ASearch
 	@Override
 	public boolean isOpen (ASearchNode node)
 	{
-		if(openList.contains(node)) {
+		if(openListHash.contains(node)) {
 			return true;
 		}
 		return false;
@@ -64,10 +63,12 @@ public class BreadthFirstSearch  extends ASearch
 	public void addToOpen(ASearchNode node)
 	{
 		openList.add(node);
+		openListHash.add(node);
 	}
 
 	@Override
 	public void addToClosed(ASearchNode node)
+
 	{
 		closeList.add(node);
 	}
@@ -94,6 +95,7 @@ public class BreadthFirstSearch  extends ASearch
 				}
 			}
 			addToClosed(bestNode);
+			openListHash.remove(bestNode);
 			return bestNode;
 		}
 	}
