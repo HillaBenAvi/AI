@@ -68,7 +68,6 @@ public class BreadthFirstSearch  extends ASearch
 
 	@Override
 	public void addToClosed(ASearchNode node)
-
 	{
 		closeList.add(node);
 	}
@@ -87,14 +86,14 @@ public class BreadthFirstSearch  extends ASearch
 		}
 		else{
 			ASearchNode bestNode = openList.poll();
-			List<ASearchNode> listOfNeighbors = bestNode.getNeighbors();
-			for(int i=0; i<listOfNeighbors.size(); i++){
-				ASearchNode neighbor = listOfNeighbors.get(i);
-				if(!isOpen(neighbor) && !isClosed(neighbor)){
-					addToOpen(listOfNeighbors.get(i));
-				}
-			}
-			addToClosed(bestNode);
+			//List<ASearchNode> listOfNeighbors = bestNode.getNeighbors();
+			//for(int i=0; i<listOfNeighbors.size(); i++){
+				//ASearchNode neighbor = listOfNeighbors.get(i);
+				//if(!isOpen(neighbor) && !isClosed(neighbor)){
+				//	addToOpen(listOfNeighbors.get(i));
+				//}
+			//}
+			//addToClosed(bestNode);
 			openListHash.remove(bestNode);
 			return bestNode;
 		}
