@@ -1,7 +1,14 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.PriorityQueue;
 
 public class UniformCostSearch   extends ASearch
 {
-	// Define lists here ...
+	PriorityQueue<ASearchNode> openList;
+	HashSet<ASearchNode> hashOpenList;
+	ArrayList<ASearchNode> closedList;
+	HashSet<ASearchNode> hashClosedList;
 	
 	@Override
 	public String getSolverName() 
@@ -22,7 +29,11 @@ public class UniformCostSearch   extends ASearch
 	@Override
 	public void initLists() 
 	{
-
+		UniformCostSearch.GComparator comparator = new UniformCostSearch.GComparator();
+		openList = new PriorityQueue(16, comparator);
+		hashOpenList = new HashSet<>();
+		closedList = new ArrayList<>();
+		hashClosedList = new HashSet<>();
 	}
 
 	@Override
@@ -31,6 +42,9 @@ public class UniformCostSearch   extends ASearch
 		ASearchNode node
 	) 
 	{
+		if (hashOpenList.contains(node)){
+			return node;
+		}
 		return null;
 	}
 
@@ -40,7 +54,7 @@ public class UniformCostSearch   extends ASearch
 		ASearchNode node
 	) 
 	{
-		return false;
+		return hashOpenList.contains(node);
 	}
 	
 	@Override
@@ -49,7 +63,7 @@ public class UniformCostSearch   extends ASearch
 		ASearchNode node
 	) 
 	{
-		return false;
+		return hashClosedList.contains(node);
 	}
 
 	@Override
@@ -58,7 +72,8 @@ public class UniformCostSearch   extends ASearch
 		ASearchNode node
 	) 
 	{
-
+		hashOpenList.add(node);
+		openList.add(node);
 	}
 
 	@Override
@@ -67,19 +82,38 @@ public class UniformCostSearch   extends ASearch
 		ASearchNode node
 	) 
 	{
-
+		hashClosedList.add(node);
+		closedList.add(node);
 	}
 
 	@Override
 	public int openSize() 
 	{
-		return 0;
+		return openList.size();
 	}
 
 	@Override
 	public ASearchNode getBest() 
 	{
-		return null;
+		if (openList.size()==0){
+			return null;
+		}
+		ASearchNode node = openList.poll();
+		hashOpenList.remove(node);
+		return node;
+	}
+
+	class GComparator implements Comparator<ASearchNode> {
+		public int compare(ASearchNode node1, ASearchNode node2)
+		{
+			if(node1.G() < node2.G()){
+				return 1;
+			}
+			else if(node1.G() > node2.G()) {
+				return -1;
+			}
+			return 0;
+		}
 	}
 
 }

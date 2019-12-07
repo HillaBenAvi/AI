@@ -5,7 +5,7 @@ public class BreadthFirstSearch  extends ASearch
 	Queue <ASearchNode> openList;
 	HashSet <ASearchNode> openListHash;
 	ArrayList<ASearchNode> closeList;
-
+	HashSet <ASearchNode> closeListHash;
 
 	@Override
 	public String getSolverName() 
@@ -26,6 +26,7 @@ public class BreadthFirstSearch  extends ASearch
 		openList = new LinkedList<> ();
 		openListHash = new HashSet<>();
 		closeList = new ArrayList<>();
+		closeListHash = new HashSet<>();
 	}
 
 	@Override
@@ -51,13 +52,12 @@ public class BreadthFirstSearch  extends ASearch
 	@Override
 	public boolean isClosed(ASearchNode node)
 	{
-		if (closeList.contains(node)) {
+		if (closeListHash.contains(node)) {
 			return true;
 		}
 		return false;
 	}
 
-	
 
 	@Override
 	public void addToOpen(ASearchNode node)
@@ -70,6 +70,7 @@ public class BreadthFirstSearch  extends ASearch
 	public void addToClosed(ASearchNode node)
 	{
 		closeList.add(node);
+		closeListHash.add(node);
 	}
 
 	@Override
@@ -86,14 +87,6 @@ public class BreadthFirstSearch  extends ASearch
 		}
 		else{
 			ASearchNode bestNode = openList.poll();
-			//List<ASearchNode> listOfNeighbors = bestNode.getNeighbors();
-			//for(int i=0; i<listOfNeighbors.size(); i++){
-				//ASearchNode neighbor = listOfNeighbors.get(i);
-				//if(!isOpen(neighbor) && !isClosed(neighbor)){
-				//	addToOpen(listOfNeighbors.get(i));
-				//}
-			//}
-			//addToClosed(bestNode);
 			openListHash.remove(bestNode);
 			return bestNode;
 		}
