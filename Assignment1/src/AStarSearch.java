@@ -89,7 +89,7 @@ public class AStarSearch   extends ASearch
 			if(node1.F() < node2.F()){
 				return -1;
 			}
-			else if(node1.F() < node2.F()) {
+			else if(node1.F() > node2.F()) {
 				return 1;
 			}
 			return 0;
