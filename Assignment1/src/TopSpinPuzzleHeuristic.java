@@ -15,7 +15,12 @@ public class TopSpinPuzzleHeuristic
 			}
 		}
 		if(currentGame[0]-currentGame[currentGame.length-1] != 1 && currentGame[0]-currentGame[currentGame.length-1] != -9){
-			heuristicValue = heuristicValue + Math.min(currentGame[0], currentGame[currentGame.length-1]);
+			if (currentGame[0] > currentGame[currentGame.length-1]){
+				heuristicValue = heuristicValue +currentGame[currentGame.length-1];
+			}
+			else{
+				heuristicValue = heuristicValue +currentGame[0];
+			}
 		}
 		return heuristicValue;
 	}
