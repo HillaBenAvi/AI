@@ -7,13 +7,13 @@ import java.util.List;
 public class Main 
 {
 
-	public static void main(String [ ] args)
+	public static void main(String [] args)
 	{
 		System.out.println("Start!");
 		//task1();
-		task2();
+		//task2();
 		//task3();
-		//task4();
+		task4();
 		//task5();
 		System.out.println("");
 		System.out.println("Done!");
