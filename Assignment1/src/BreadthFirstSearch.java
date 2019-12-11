@@ -91,5 +91,4 @@ public class BreadthFirstSearch  extends ASearch
 			return bestNode;
 		}
 	}
-
 }
