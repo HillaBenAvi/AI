@@ -1,14 +1,11 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Comparator;
+import java.util.*;
 import java.util.PriorityQueue;
 
 public class AStarSearch   extends ASearch
 {
-	PriorityQueue <HeuristicSearchNode> openList;
-	ArrayList <ASearchNode> closeList;
+	PriorityQueue <ASearchNode> openList;
+	HashSet<ASearchNode> hashOpenList;
+	HashSet <ASearchNode> closeList;
 
 	@Override
 	public String getSolverName() 
@@ -28,7 +25,8 @@ public class AStarSearch   extends ASearch
 	{
 		TheComparator comparator = new TheComparator();
 		openList = new PriorityQueue(11, comparator);
-		closeList = new ArrayList<>();
+		hashOpenList = new HashSet<>();
+		closeList = new HashSet<>();
 	}
 
 	@Override
@@ -43,7 +41,7 @@ public class AStarSearch   extends ASearch
 	@Override
 	public boolean isOpen(ASearchNode node)
 	{
-		if(openList.contains(node)){
+		if(hashOpenList.contains(node)){
 			return true;
 		}
 		return false;
@@ -61,7 +59,8 @@ public class AStarSearch   extends ASearch
 	@Override
 	public void addToOpen(ASearchNode node)
 	{
-		openList.add((HeuristicSearchNode)node);
+		hashOpenList.add(node);
+		openList.add(node);
 	}
 
 	@Override
@@ -79,18 +78,23 @@ public class AStarSearch   extends ASearch
 	@Override
 	public ASearchNode getBest()
 	{
-		return openList.poll();
+		if( openList.size() == 0 ){
+			return null;
+		}
+		ASearchNode node = openList.poll();
+		hashOpenList.remove(node);
+		return node;
 	}
 
 
 	class TheComparator implements Comparator<ASearchNode> {
 		public int compare(ASearchNode node1, ASearchNode node2)
 		{
-			if(node1.F() < node2.F()){
-				return -1;
-			}
-			else if(node1.F() > node2.F()) {
+			if(node1.F() > node2.F()){
 				return 1;
+			}
+			else if(node1.F() < node2.F()) {
+				return -1;
 			}
 			return 0;
 		}
