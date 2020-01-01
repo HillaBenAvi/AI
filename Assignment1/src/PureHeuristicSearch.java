@@ -7,7 +7,6 @@ public class PureHeuristicSearch  extends ASearch
 {
 	PriorityQueue<ASearchNode> openList;
 	HashSet<ASearchNode> hashOpenList;
-	ArrayList<ASearchNode> closedList;
 	HashSet<ASearchNode> hashClosedList;
 	
 	@Override
@@ -32,7 +31,6 @@ public class PureHeuristicSearch  extends ASearch
 		PureHeuristicSearch.HComparator comparator = new PureHeuristicSearch.HComparator();
 		openList = new PriorityQueue(16, comparator);
 		hashOpenList = new HashSet<>();
-		closedList = new ArrayList<>();
 		hashClosedList = new HashSet<>();
 	}
 
@@ -82,7 +80,6 @@ public class PureHeuristicSearch  extends ASearch
 		ASearchNode node
 	) 
 	{
-		closedList.add(node);
 		hashClosedList.add(node);
 	}
 
@@ -106,10 +103,10 @@ public class PureHeuristicSearch  extends ASearch
 	class HComparator implements Comparator<ASearchNode> {
 		public int compare(ASearchNode node1, ASearchNode node2)
 		{
-			if(node1.H() < node2.H()){
+			if(node1.H() > node2.H()){
 				return 1;
 			}
-			else if(node1.H() > node2.H()) {
+			else if(node1.H() < node2.H()) {
 				return -1;
 			}
 			return 0;

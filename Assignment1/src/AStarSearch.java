@@ -87,10 +87,10 @@ public class AStarSearch   extends ASearch
 		public int compare(ASearchNode node1, ASearchNode node2)
 		{
 			if(node1.F() < node2.F()){
-				return 1;
+				return -1;
 			}
 			else if(node1.F() > node2.F()) {
-				return -1;
+				return 1;
 			}
 			return 0;
 		}

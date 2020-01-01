@@ -106,10 +106,10 @@ public class UniformCostSearch   extends ASearch
 	class GComparator implements Comparator<ASearchNode> {
 		public int compare(ASearchNode node1, ASearchNode node2)
 		{
-			if(node1.G() < node2.G()){
+			if(node1.G() > node2.G()){
 				return 1;
 			}
-			else if(node1.G() > node2.G()) {
+			else if(node1.G() < node2.G()) {
 				return -1;
 			}
 			return 0;
