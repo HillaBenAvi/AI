@@ -6,12 +6,11 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Start!");
-        task1();
-//        task2();
-//        task3();
+       // task1();
+        task2();
+        //task3();
         System.out.println("Done!");
     }
-
 
     private static void task1() {
         System.out.println("---------- Task 1 ----------");

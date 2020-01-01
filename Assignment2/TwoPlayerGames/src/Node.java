@@ -2,9 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
-    public enum NodeType {MAX, MIN}
-
-    ;
+    public enum NodeType {MAX, MIN};
 
     private IBoard board;
     private NodeType nodeType;
