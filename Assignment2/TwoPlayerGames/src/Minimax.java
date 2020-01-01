@@ -15,28 +15,31 @@ public class Minimax implements ISolver {
 
     private double MinimaxAlgorithm(Node node)
     {
-
-        double best = 0;
+        double childMiniMaxScore;
         if(node.isTerminalNode()){
             return node.getScore();
         }
         List<Node> children = node.getNodeChildren();
         if(node.getNodeType() == Node.NodeType.MAX) {
-            for (Node child : children) {
-                if (MinimaxAlgorithm(child) > best) {
-                    best = child.getScore();
+            double best = MinimaxAlgorithm(children.get(0));
+            for (int i=1; i<children.size(); i++) {
+                childMiniMaxScore = MinimaxAlgorithm(children.get(i));
+                if (childMiniMaxScore > best) {
+                    best = childMiniMaxScore;
                 }
             }
-
+            return best;
         }
-        else{
-            for (Node child : children) {
-                if (MinimaxAlgorithm(child) < best) {
-                    best = child.getScore();
+        else {
+            double best = MinimaxAlgorithm(children.get(0));
+            for (int i=1; i<children.size(); i++) {
+                childMiniMaxScore = MinimaxAlgorithm(children.get(i));
+                if (childMiniMaxScore < best) {
+                    best = childMiniMaxScore;
                 }
             }
+            return best;
         }
-        return best;
     }
 
 }
